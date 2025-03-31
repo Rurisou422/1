@@ -2,11 +2,14 @@
   command = "npm run build"
   publish = "dist"
   node_version = "18.18.2"
+  ignore_next_js = true
 
 [build.environment]
   NODE_VERSION = "18.18.2"
   NODE_ENV = "production"
   NPM_FLAGS = "--no-optional"
+  NETLIFY_USE_NEXTJS = "false"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 [[redirects]]
   from = "/*"
