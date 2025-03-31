@@ -1,0 +1,14 @@
+{
+  "pages\\index.tsx -> ../src/components/CallToAction": {
+    "id": "pages\\index.tsx -> ../src/components/CallToAction",
+    "files": [
+      "static/chunks/src_components_CallToAction_tsx.js"
+    ]
+  },
+  "pages\\index.tsx -> ../src/components/Products": {
+    "id": "pages\\index.tsx -> ../src/components/Products",
+    "files": [
+      "static/chunks/src_components_Products_tsx.js"
+    ]
+  }
+}
