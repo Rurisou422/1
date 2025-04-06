@@ -72,7 +72,7 @@ const HomePage = () => {
                   </motion.button>
                   
                   <motion.a
-                    href="https://discord.gg/yourdiscord"
+                    href="http://discord.gg/diviner"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-8 py-3 bg-transparent border border-gray-700 hover:border-indigo-400/50 rounded-xl 

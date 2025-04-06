@@ -84,13 +84,27 @@ const GuideItem: React.FC<{ guide: Guide }> = ({ guide }) => {
 
 // Game Settings UI Component
 const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
-  const [selectedSection, setSelectedSection] = useState<string>('basics');
+  const [selectedSection, setSelectedSection] = useState<
+    | 'basics'
+    | 'hardware_gaming_pc'
+    | 'hardware_2nd_pc'
+    | 'testing_2nd_pc'
+    | 'dma_card'
+    | 'fuser_setup'
+    | 'edid_spoofing'
+    | 'kmbox_setup'
+    | 'kmbox_net'
+    | 'kmbox_bplus'
+    | 'development'
+    | 'firmwares'
+    | 'requirements'
+  >('basics');
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90" onClick={onBack}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90">
       <div className="relative w-full max-w-5xl">
         {/* Fullscreen backdrop with faint image */}
-        <div className="absolute inset-0 bg-[url('/images/forest-bg.jpg')] bg-cover bg-center opacity-20 blur-xl"></div>
+        <div className="absolute inset-0 bg-[url('/images/forest-bg.jpg')] bg-cover bg-center opacity-20 blur-sm"></div>
         
         {/* Floating particles */}
         <div className="absolute inset-0 overflow-hidden">
@@ -109,7 +123,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         </div>
         
         {/* Content container */}
-        <div className="relative mx-auto w-full h-[80vh] bg-black/60 backdrop-blur-lg overflow-hidden p-4" onClick={(e) => e.stopPropagation()}>
+        <div className="relative mx-auto w-full h-[80vh] bg-black/60 backdrop-blur-sm overflow-hidden p-4">
           
           {/* Title positioned left like in screenshot */}
           <div className="mb-8 pt-4">
@@ -140,7 +154,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     }`}
                     onClick={() => setSelectedSection('basics')}
                   >
-                    <span className={`text-sm font-medium ${selectedSection === 'basics' || selectedSection === 'hardware_gaming_pc' || selectedSection === 'hardware_2nd_pc' || selectedSection === 'testing_2nd_pc' ? 'border-b border-white pb-1' : ''}`}>BASICS</span>
+                    <span className="text-sm font-medium">BASICS</span>
                   </div>
 
                   {/* Collapsible subsections for BASICS */}
@@ -155,7 +169,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         onClick={() => setSelectedSection('hardware_gaming_pc')}
                       >
                         <span className="w-3 text-center">≡</span>
-                        <span className={`text-xs ${selectedSection === 'hardware_gaming_pc' ? 'border-b border-white/70' : ''}`}>Hardware Setup Gaming PC</span>
+                        <span className="text-xs">Hardware Setup Gaming PC</span>
                       </div>
                       <div 
                         className={`py-1 cursor-pointer text-xs font-light tracking-[0.1em] transition-colors flex items-center ${
@@ -166,7 +180,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         onClick={() => setSelectedSection('hardware_2nd_pc')}
                       >
                         <span className="w-3 text-center">≡</span>
-                        <span className={`text-xs ${selectedSection === 'hardware_2nd_pc' ? 'border-b border-white/70' : ''}`}>Hardware Setup 2nd PC</span>
+                        <span className="text-xs">Hardware Setup 2nd PC</span>
                       </div>
                       <div 
                         className={`py-1 cursor-pointer text-xs font-light tracking-[0.1em] transition-colors flex items-center ${
@@ -177,7 +191,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         onClick={() => setSelectedSection('testing_2nd_pc')}
                       >
                         <span className="w-3 text-center">≡</span>
-                        <span className={`text-xs ${selectedSection === 'testing_2nd_pc' ? 'border-b border-white/70' : ''}`}>Testing (2nd PC)</span>
+                        <span className="text-xs">Testing (2nd PC)</span>
                       </div>
                     </div>
                   )}
@@ -193,7 +207,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     }`}
                     onClick={() => setSelectedSection('dma_card')}
                   >
-                    <span className={`text-sm font-medium ${selectedSection === 'dma_card' ? 'border-b border-white pb-1' : ''}`}>DMA CARD</span>
+                    <span className="text-sm font-medium">DMA CARD</span>
                   </div>
                 </div>
                 
@@ -207,7 +221,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     }`}
                     onClick={() => setSelectedSection('fuser_setup')}
                   >
-                    <span className={`text-sm font-medium ${selectedSection === 'fuser_setup' || selectedSection === 'edid_spoofing' ? 'border-b border-white pb-1' : ''}`}>FUSER SETUP</span>
+                    <span className="text-sm font-medium">FUSER SETUP</span>
                   </div>
 
                   {/* Collapsible subsections for FUSER SETUP */}
@@ -222,7 +236,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         onClick={() => setSelectedSection('fuser_setup')}
                       >
                         <span className="w-3 text-center">≡</span>
-                        <span className={`text-xs ${selectedSection === 'fuser_setup' ? 'border-b border-white/70' : ''}`}>Fuser Configuration</span>
+                        <span className="text-xs">Fuser Configuration</span>
                       </div>
                       <div 
                         className={`py-1 cursor-pointer text-xs font-light tracking-[0.1em] transition-colors flex items-center ${
@@ -233,7 +247,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         onClick={() => setSelectedSection('edid_spoofing')}
                       >
                         <span className="w-3 text-center">≡</span>
-                        <span className={`text-xs ${selectedSection === 'edid_spoofing' ? 'border-b border-white/70' : ''}`}>EDID Spoofing</span>
+                        <span className="text-xs">EDID Spoofing</span>
                       </div>
                     </div>
                   )}
@@ -249,7 +263,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     }`}
                     onClick={() => setSelectedSection('kmbox_setup')}
                   >
-                    <span className={`text-sm font-medium ${selectedSection === 'kmbox_setup' || selectedSection === 'kmbox_net' || selectedSection === 'kmbox_bplus' ? 'border-b border-white pb-1' : ''}`}>KMBOX SETUP</span>
+                    <span className="text-sm font-medium">KMBOX SETUP</span>
                   </div>
 
                   {/* Collapsible subsections for KMBOX SETUP */}
@@ -264,7 +278,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         onClick={() => setSelectedSection('kmbox_net')}
                       >
                         <span className="w-3 text-center">≡</span>
-                        <span className={`text-xs ${selectedSection === 'kmbox_net' ? 'border-b border-white/70' : ''}`}>KMBOX NET</span>
+                        <span className="text-xs">KMBOX NET</span>
                       </div>
                       <div 
                         className={`py-1 cursor-pointer text-xs font-light tracking-[0.1em] transition-colors flex items-center ${
@@ -275,7 +289,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         onClick={() => setSelectedSection('kmbox_bplus')}
                       >
                         <span className="w-3 text-center">≡</span>
-                        <span className={`text-xs ${selectedSection === 'kmbox_bplus' ? 'border-b border-white/70' : ''}`}>KMBOX B+</span>
+                        <span className="text-xs">KMBOX B+</span>
                       </div>
                     </div>
                   )}
@@ -291,7 +305,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     }`}
                     onClick={() => setSelectedSection('development')}
                   >
-                    <span className={`text-sm font-medium ${selectedSection === 'development' ? 'border-b border-white pb-1' : ''}`}>DEVELOPMENT</span>
+                    <span className="text-sm font-medium">DEVELOPMENT</span>
                   </div>
                 </div>
                 
@@ -305,7 +319,7 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     }`}
                     onClick={() => setSelectedSection('firmwares')}
                   >
-                    <span className={`text-sm font-medium ${selectedSection === 'firmwares' ? 'border-b border-white pb-1' : ''}`}>FIRMWARES</span>
+                    <span className="text-sm font-medium">FIRMWARES</span>
                   </div>
                 </div>
               </div>
@@ -644,13 +658,12 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                           <p className="text-white/70 mb-2">Example:</p>
                           <div className="rounded border border-white/10 p-2 bg-black/30 max-w-md">
                             <img 
-                              src="/images/Fuser example.png" 
+                              src="/images/FuserGuide.png" 
                               alt="Fuser Background Example" 
                               className="max-w-full h-auto"
-              />
-            </div>
-          </div>
-        </div>
+                            />
+                          </div>
+                        </div>
                       
                       <div className="border-b border-gray-800/40 pb-5">
                         <h3 className="text-lg font-medium text-white mb-3">Step 3: Reconnect Cables to the Fuser</h3>
@@ -1211,35 +1224,48 @@ const GameSettingsUI: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                       <h2 className="text-xl font-medium tracking-wider text-white">DMA Card</h2>
                     </div>
                     
-                    <p>
-                      DMAs come in variants: 35T, 75T, 100T-100T, and 75T-100T. These indicate the speed of your DMA card, crucial for WPM/RPM heavy features like silent aim or omni sprint.
+                    <p className="text-sm italic text-gray-400 mb-4">
+                      DMA Card information will be added here.
                     </p>
-                    
-                    <div className="rounded-lg border border-yellow-600/30 bg-yellow-900/10 px-5 py-4 mb-6">
-                      <p className="text-sm text-yellow-400 font-medium mb-2">Important Note</p>
-                      <p className="text-sm text-gray-300">
-                        We don't recommend the 75T card due to minimal performance gains. For optimal speed, choose 100T-100T or 75T-100T. Avoid cheap Chinese DMA cards due to lack of support and reliability issues compared to Western boards.
+
+                    <div className="space-y-6">
+                      <p>
+                        DMAs come in variants: 35T, 75T, 100T-100T, and 75T-100T. These indicate the speed of your DMA card, 
+                        crucial for WPM/RPM heavy features like silent aim or omni sprint. I don't recommend the 75T card due 
+                        to minimal performance gains. For optimal speed, choose 100T-100T or 75T-100T. Avoid cheap Chinese DMA 
+                        cards due to lack of support and reliability issues compared to Western boards.
                       </p>
-                    </div>
-                    
-                    <div className="border-t border-gray-800/40 pt-4 mt-8">
-                      <h3 className="text-lg text-white mb-2">35T Cards</h3>
-                      <p className="mb-1"><span className="text-gray-400">Recommended:</span> Lambda Concept Screamer PCIe Squirrel</p>
-                      <p className="mb-1"><span className="text-gray-400">Average Speed:</span> 150 - 200 MBPS</p>
-                      <p className="text-sm text-gray-400">Reliable with great support</p>
-                    </div>
-                    
-                    <div className="border-t border-gray-800/40 pt-4 mt-6">
-                      <h3 className="text-lg text-white mb-2">75T Cards</h3>
-                      <p className="mb-1"><span className="text-gray-400">Recommended:</span> None (not worth the money)</p>
-                      <p className="mb-1"><span className="text-gray-400">Average Speed:</span> 250 - 300 MBPS</p>
-                    </div>
-                    
-                    <div className="border-t border-gray-800/40 pt-4 mt-6">
-                      <h3 className="text-lg text-white mb-2">100T Cards</h3>
-                      <p className="mb-1"><span className="text-gray-400">Recommended:</span> ZDMA</p>
-                      <p className="mb-1"><span className="text-gray-400">Average Speed:</span> 800 - 1050 MBPS</p>
-                      <p className="text-sm text-gray-400">Currently the only source for such boards</p>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="rounded-lg border border-blue-800/20 bg-blue-900/10 p-4">
+                          <h3 className="text-blue-400 font-medium mb-2">35T Card</h3>
+                          <p className="mb-2">Recommended: Lambda Concept Screamer PCIe Squirrel (reliable with great support)</p>
+                          <p className="text-sm text-gray-400">Average speed: 150 - 200 MBPS</p>
+                        </div>
+                        
+                        <div className="rounded-lg border border-yellow-800/20 bg-yellow-900/10 p-4">
+                          <h3 className="text-yellow-400 font-medium mb-2">75T Card</h3>
+                          <p className="mb-2">Recommended: None (not worth the money)</p>
+                          <p className="text-sm text-gray-400">Average Speed: 250-300 MBPS</p>
+                        </div>
+                        
+                        <div className="rounded-lg border border-green-800/20 bg-green-900/10 p-4">
+                          <h3 className="text-green-400 font-medium mb-2">100T Card</h3>
+                          <p className="mb-2">Recommended: ZDMA (currently the only source for such boards)</p>
+                          <p className="text-sm text-gray-400">Speed: 800 - 1050 MBPS</p>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-red-900/10 border border-red-800/20 rounded-lg p-4 mt-4">
+                        <div className="flex items-start">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-red-400 mt-0.5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                          </svg>
+                          <p className="text-sm text-red-300">
+                            Warning: Avoid cheap Chinese DMA cards as they often lack proper support and have reliability issues compared to Western boards.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -1336,295 +1362,14 @@ const Guides: React.FC = () => {
       title: '35T Captain Flash Guide',
       subtitle: 'Complete guide to flash your 35T Captain firmware',
       category: 'flash',
-      content: (
-        <div className="space-y-6">
-          {/* Step 1 */}
-          <div className="bg-black/60 backdrop-blur-sm rounded-lg border border-yellow-600/20 overflow-hidden">
-            <div className="bg-gradient-to-r from-yellow-900/30 to-transparent px-5 py-3 border-b border-yellow-600/20">
-              <h3 className="text-xl font-medium text-white">Step 1</h3>
-              <h4 className="text-lg font-medium text-yellow-400">35T Captain Flash Guide</h4>
-            </div>
-            <div className="px-5 py-4 space-y-3">
-              <p className="flex items-center text-yellow-300">
-                <span className="font-bold mr-2">Tool:</span>
-                <a href="https://cdn.discordapp.com/attachments/1182453168743927881/1261809838095204485/FlashTool35TCaptain.rar?ex=67f3a73c&is=67f255bc&hm=ab455f6a26b3c20e18ed44086eeb296e9f50ca0e2eebeb3fd1910d5defb9c383&" className="text-blue-400 hover:underline">@FlashTool35TCaptain.rar</a>
-              </p>
-              
-              <p className="text-white">
-                <span className="font-bold">Note:</span> Before Flashing, Make Sure your wire is in Jtag port ➔ Update port
-              </p>
-              
-              <p className="text-white">(Type C to Type C Wire can not be used to Flash)</p>
-              
-              <div className="space-y-2 mt-4">
-                <p className="text-white">Step 1: Download FlashTool35TCaptain</p>
-                <p className="text-white">Step 2: Run Zdiag_Drivers.exe To update drivers</p>
-                <p className="text-white">Step 3: When you Open Zdiag, it will ask "Online update?" Click no</p>
-                <p className="text-white">Step 4: Click on Options ➔ List All Devices</p>
-                <p className="text-white">Step 5: Find "Quad RS-232-HS (Interface 0)"</p>
-                <p className="text-white">Step 6: Click On Reinstall Drivers and wait for competition</p>
-              </div>
-              
-              <div className="mt-4">
-                <img 
-                  src="/images/35tFlashGuidePart1.png" 
-                  alt="35T Captain Flashing Tool Interface" 
-                  className="rounded-md border border-gray-700/50 w-full"
-                />
-                <p className="text-center text-xs text-gray-500 mt-1">DIVINER DMA Inc©</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Step 2 */}
-          <div className="bg-black/60 backdrop-blur-sm rounded-lg border border-yellow-600/20 overflow-hidden">
-            <div className="bg-gradient-to-r from-yellow-900/30 to-transparent px-5 py-3 border-b border-yellow-600/20">
-              <h3 className="text-xl font-medium text-white">Step 2</h3>
-              <h4 className="text-lg font-medium text-yellow-400">35T Captain Flash Guide</h4>
-            </div>
-            <div className="px-5 py-4 space-y-3">
-              <div className="space-y-2">
-                <p className="text-white">Step 1: Place Firmware in "Ocd" Folder</p>
-                <p className="text-white">Step 2: Rename your Firmware bin File as "pcileech_screamer_m2_top.bin"</p>
-                <p className="text-white">Step 3: Run File That Says "Open"</p>
-                <p className="text-white">Step 4: Wait For firmware to flash, it takes 2 mins to update<br />and it will stuck on Sector 24<br />No need to worry about it</p>
-                <p className="text-white">Step 5: When Completed it will give an error which means Successfully Completed</p>
-                <p className="text-white">Step 6: Restart Gaming pc ➔ Wire Data port and your good</p>
-              </div>
-              
-              <div className="mt-4">
-                <img 
-                  src="/images/35tFlashGuidePart2.png" 
-                  alt="35T Captain Flashing Process" 
-                  className="rounded-md border border-gray-700/50 w-full"
-                />
-                <p className="text-center text-xs text-gray-500 mt-1">DIVINER DMA Inc©</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
+      content: <div>Flash guide content for 35T Captain</div>,
     },
     {
       id: 'squirrel-flash-guide',
       title: 'Squirrel / MVP Flash Guide',
       subtitle: 'Complete guide to flash your Squirrel or MVP firmware',
       category: 'flash',
-      content: (
-        <div className="space-y-6">
-          {/* Step 1 */}
-          <div className="bg-black/60 backdrop-blur-sm rounded-lg border border-yellow-600/20 overflow-hidden">
-            <div className="bg-gradient-to-r from-yellow-900/30 to-transparent px-5 py-3 border-b border-yellow-600/20">
-              <h3 className="text-xl font-medium text-white">Step 1</h3>
-              <h4 className="text-lg font-medium text-yellow-400">Squirrel / MVP Flash Guide</h4>
-            </div>
-            <div className="px-5 py-4 space-y-3">
-              <p className="flex items-center text-yellow-300">
-                <span className="font-bold mr-2">Tool:</span>
-                <a href="https://cdn.discordapp.com/attachments/1182453168743927881/1259692784898670603/Squirrel35TFlashTool.rar?ex=67f3dc93&is=67f28b13&hm=3f86002831bdcb962358780fe5b039d2654a079b93ed48ee682c789c0ad2e2fe&" className="text-blue-400 hover:underline">@Squirrel35TFlashTool.rar</a>
-              </p>
-              
-              <p className="text-white">
-                <span className="font-bold">Note:</span> Before Flashing, Make Sure your wire is in Jtag port ➔ Update port
-              </p>
-              
-              <p className="text-white">(Type C to Type C Wire can not be used to Flash)</p>
-              
-              <div className="space-y-2 mt-4">
-                <p className="text-white">Step 1: Download Squirrel35TFlashTool</p>
-                <p className="text-white">Step 2: Run "JtagDrivers.exe"</p>
-                <p className="text-white">Step 3: Click On Install and it will install drivers</p>
-                <p className="text-white">Step 4: If it Says "Sucess" Means Drivers installed</p>
-                <p className="text-white">➔ If it says "Already Installed means your dma wire not in jtag port or dma is captain dma not Squirrel or wire broken</p>
-              </div>
-              
-              <div className="mt-4">
-                <img 
-                  src="/images/SquirrelFlashGuidePart1.png" 
-                  alt="Squirrel/MVP Flashing Tool Interface" 
-                  className="rounded-md border border-gray-700/50 w-full"
-                />
-                <p className="text-center text-xs text-gray-500 mt-1">DIVINER DMA Inc©</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Step 2 */}
-          <div className="bg-black/60 backdrop-blur-sm rounded-lg border border-yellow-600/20 overflow-hidden">
-            <div className="bg-gradient-to-r from-yellow-900/30 to-transparent px-5 py-3 border-b border-yellow-600/20">
-              <h3 className="text-xl font-medium text-white">Step 2</h3>
-              <h4 className="text-lg font-medium text-yellow-400">Squirrel / MVP Flash Guide</h4>
-            </div>
-            <div className="px-5 py-4 space-y-3">
-              <div className="space-y-2">
-                <p className="text-white">Step 1: Run Flash tool "FlashFirmware.exe"</p>
-                <p className="text-white">Step 2: Click on The White box to Sellect Firmware bin file</p>
-                <p className="text-white">Step 3: Click on the "Start" Button and it will start to update firmware</p>
-                <p className="text-white">(It takes 2 to 3 mins to update ➔ and it will also stuck on "Sector 24" for like 1 minute which is normal</p>
-                <p className="text-white">Step 4: When Completed it will say Successfully Completed</p>
-                <p className="text-white">Step 5: Restart Gaming pc ➔ Wire Data port and your good</p>
-              </div>
-              
-              <div className="mt-4">
-                <img 
-                  src="/images/SquirrelFlashGuidePart2.png" 
-                  alt="Squirrel/MVP Flashing Process" 
-                  className="rounded-md border border-gray-700/50 w-full"
-                />
-                <p className="text-center text-xs text-gray-500 mt-1">DIVINER DMA Inc©</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: '75t-flash-guide',
-      title: '75T with JTag Interface Guide',
-      subtitle: 'Complete guide to flash your 75T Captain firmware',
-      category: 'flash',
-      content: (
-        <div className="space-y-6">
-          {/* Step 1 */}
-          <div className="bg-black/60 backdrop-blur-sm rounded-lg border border-yellow-600/20 overflow-hidden">
-            <div className="bg-gradient-to-r from-yellow-900/30 to-transparent px-5 py-3 border-b border-yellow-600/20">
-              <h3 className="text-xl font-medium text-white">Step 1</h3>
-              <h4 className="text-lg font-medium text-yellow-400">75T with JTag Interface Guide</h4>
-            </div>
-            <div className="px-5 py-4 space-y-3">
-              <p className="flex items-center text-yellow-300">
-                <span className="font-bold mr-2">Tool:</span>
-                <a href="https://cdn.discordapp.com/attachments/1182453168743927881/1265781676735205533/FlashTool75tCaptain.rar?ex=67f399cc&is=67f2484c&hm=7a1fd9f1612db3a5c5d0486e6af22c2e245713d976c4f730803f1db7331ff30f&" className="text-blue-400 hover:underline">@FlashTool75tCaptain.rar</a>
-              </p>
-              
-              <p className="text-white">
-                <span className="font-bold">Note:</span> Before Flashing, Make Sure your wire is in Jtag port ➔ Update port
-              </p>
-              
-              <p className="text-white">(Type C to Type C Wire can not be used to Flash)</p>
-              
-              <div className="space-y-2 mt-4">
-                <p className="text-white">Step 1: Download FlashTool75tCaptain</p>
-                <p className="text-white">Step 2: Open "JTagDriver" Folder and Run "JTagDrivers.exe"</p>
-                <p className="text-white">Step 3: Click On Install and it will install drivers</p>
-                <p className="text-white">Step 4: If it Says "Sucess" Means Drivers installed</p>
-                <p className="text-white">➔ If it says "Already Installed means your dma wire not in jtag port or dma is captain dma not Squirrel or wire broken</p>
-              </div>
-              
-              <div className="mt-4">
-                <img 
-                  src="/images/Captain75tPart1.png" 
-                  alt="75T with JTag Flashing Tool Interface" 
-                  className="rounded-md border border-gray-700/50 w-full"
-                />
-                <p className="text-center text-xs text-gray-500 mt-1">DIVINER DMA Inc©</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Step 2 */}
-          <div className="bg-black/60 backdrop-blur-sm rounded-lg border border-yellow-600/20 overflow-hidden">
-            <div className="bg-gradient-to-r from-yellow-900/30 to-transparent px-5 py-3 border-b border-yellow-600/20">
-              <h3 className="text-xl font-medium text-white">Step 2</h3>
-              <h4 className="text-lg font-medium text-yellow-400">75T with JTag Interface Guide</h4>
-            </div>
-            <div className="px-5 py-4 space-y-3">
-              <div className="space-y-2">
-                <p className="text-white">Step 1: Open "FlashTool75t" Folder and Run Flash tool "CH347FpgaFlashTool"</p>
-                <p className="text-white">Step 2: Change Bit option To Bin, and On Top Left Select "xc7a75t" From the list</p>
-                <p className="text-white">Step 3: Click on the box and Select your Firmware .Bin File, You Can put your firmware in the Folder Aswell</p>
-                <p className="text-white">Step 4: Click on the Second Button Next to the % Bar and it will start to update firmware</p>
-                <p className="text-white">(It takes 2 to 3 mins to update ➔ and it will also stuck on "Sector 32" for like 1 minute which is normla</p>
-                <p className="text-white">Step 5: When Completed it will Give Little error which means Successfully Completed</p>
-                <p className="text-white">Step 6: Restart Gaming pc ➔ Wire Data port and your good</p>
-              </div>
-              
-              <div className="mt-4">
-                <img 
-                  src="/images/Captain75tPart2.png" 
-                  alt="75T with JTag Flashing Process" 
-                  className="rounded-md border border-gray-700/50 w-full"
-                />
-                <p className="text-center text-xs text-gray-500 mt-1">DIVINER DMA Inc©</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: '100t-flash-guide',
-      title: 'MVP 75T Guide',
-      subtitle: 'Complete guide to flash your MVP 75T firmware',
-      category: 'flash',
-      content: (
-        <div className="space-y-6">
-          {/* Step 1 */}
-          <div className="bg-black/60 backdrop-blur-sm rounded-lg border border-yellow-600/20 overflow-hidden">
-            <div className="bg-gradient-to-r from-yellow-900/30 to-transparent px-5 py-3 border-b border-yellow-600/20">
-              <h3 className="text-xl font-medium text-white">Step 1</h3>
-              <h4 className="text-lg font-medium text-yellow-400">MVP 75T Guide</h4>
-            </div>
-            <div className="px-5 py-4 space-y-3">
-              <p className="flex items-center text-yellow-300">
-                <span className="font-bold mr-2">Tool:</span>
-                <a href="https://cdn.discordapp.com/attachments/1182453168743927881/1266202034428969051/FlashToolMvp75T.rar?ex=67f3cfc9&is=67f27e49&hm=0f57388887ed3ade8ebffcd47427f7c809bf4634fbb7d5b38eb2bc7c29f4f557&" className="text-blue-400 hover:underline">@FlashToolMvp75T.rar</a>
-              </p>
-              
-              <p className="text-white">
-                <span className="font-bold">Note:</span> Before Flashing, Make Sure your wire is in Jtag port ➔ Update port
-              </p>
-              
-              <p className="text-white">(Type C to Type C Wire can not be used to Flash)</p>
-              
-              <div className="space-y-2 mt-4">
-                <p className="text-white">Step 1: Download FlashToolMvp75T</p>
-                <p className="text-white">Step 2: Run Zdiag.exe To update drivers</p>
-                <p className="text-white">Step 3: When you Open Zdiag, it will ask "Online update?" Click no</p>
-                <p className="text-white">Step 4: Click on Options ➔ List All Devices</p>
-                <p className="text-white">Step 5: Find "Single RS-232-HS"</p>
-                <p className="text-white">Step 6: Click On Reinstall Drivers and wait for competition</p>
-              </div>
-              
-              <div className="mt-4">
-                <img 
-                  src="/images/MVP75t1.png" 
-                  alt="MVP 75T Flashing Tool Interface" 
-                  className="rounded-md border border-gray-700/50 w-full"
-                />
-                <p className="text-center text-xs text-gray-500 mt-1">DIVINER DMA Inc©</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Step 2 */}
-          <div className="bg-black/60 backdrop-blur-sm rounded-lg border border-yellow-600/20 overflow-hidden">
-            <div className="bg-gradient-to-r from-yellow-900/30 to-transparent px-5 py-3 border-b border-yellow-600/20">
-              <h3 className="text-xl font-medium text-white">Step 2</h3>
-              <h4 className="text-lg font-medium text-yellow-400">MVP 75T Single RS-232-HS Guide</h4>
-            </div>
-            <div className="px-5 py-4 space-y-3">
-              <div className="space-y-2">
-                <p className="text-white">Step 1: Place Firmware in "FlashToolMvp75T" Folder</p>
-                <p className="text-white">Step 2: Rename your Firmware bin File as "pcileech_enigma_x1_top.bin"</p>
-                <p className="text-white">Step 3: Run File That Says "Flash.bat"</p>
-                <p className="text-white">Step 4: Wait For firmware to flash, it takes 2 mins to update<br />and it will stuck on Sector 31 or 32<br />No need to worry about it</p>
-                <p className="text-white">Step 5: When Completed it will give an error which means Successfully Completed</p>
-                <p className="text-white">Step 6: Restart Gaming pc ➔ Wire Data port and your good</p>
-              </div>
-              
-              <div className="mt-4">
-                <img 
-                  src="/images/MVP75t2.png" 
-                  alt="MVP 75T Flashing Process" 
-                  className="rounded-md border border-gray-700/50 w-full"
-                />
-                <p className="text-center text-xs text-gray-500 mt-1">DIVINER DMA Inc©</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
+      content: <div>Flash guide content for Squirrel/MVP</div>,
     }
   ];
 
@@ -1682,7 +1427,7 @@ const Guides: React.FC = () => {
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              className={`h-5 w-5 ${activeCategory === 'flash' ? 'animate-pulse-yellow' : ''}`}
+              className="h-5 w-5" 
               viewBox="0 0 20 20" 
               fill={activeCategory === 'flash' ? '#FFD700' : 'currentColor'}
             >
@@ -1701,13 +1446,28 @@ const Guides: React.FC = () => {
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              className={`h-5 w-5 ${activeCategory === 'troubleshooting' ? 'animate-pulse-blue' : ''}`}
+              className="h-5 w-5" 
               viewBox="0 0 20 20" 
               fill={activeCategory === 'troubleshooting' ? '#00BFFF' : 'currentColor'}
             >
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 100-2 1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
             </svg>
             <span className="text-base font-medium">Troubleshooting</span>
+          </button>
+          
+          <button
+            className="px-6 py-3 flex items-center gap-2 relative transition-all text-gray-400 hover:text-gray-200 bg-gradient-to-br from-blue-600/30 to-blue-800/10"
+            onClick={() => setShowGameSettings(true)}
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-5 w-5" 
+              viewBox="0 0 20 20" 
+              fill="currentColor"
+            >
+              <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
+            </svg>
+            <span className="text-base font-medium">Amateur</span>
           </button>
         </div>
       </div>
@@ -1739,7 +1499,7 @@ const Guides: React.FC = () => {
           <>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-7 w-7 mr-2 text-yellow-500 animate-pulse-yellow"
+              className="h-7 w-7 mr-2 text-yellow-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -1751,7 +1511,7 @@ const Guides: React.FC = () => {
           <>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-7 w-7 mr-2 text-cyan-500 animate-pulse-blue"
+              className="h-7 w-7 mr-2 text-cyan-500"
               fill="currentColor"
               viewBox="0 0 20 20"
             >

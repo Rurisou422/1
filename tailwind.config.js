@@ -18,6 +18,9 @@ export default {
         'button-glow-blue': 'button-glow-blue 2s ease-in-out infinite',
         'title-shake': 'title-shake 2s ease-in-out infinite',
         'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
+        'pulse-slow': 'pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-yellow': 'pulse-yellow 2s ease-in-out infinite',
+        'pulse-blue': 'pulse-blue 2s ease-in-out infinite',
       },
       textShadow: {
         'blue': '0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3)',
@@ -26,6 +29,36 @@ export default {
         star: {
           '0%': { transform: 'translateY(100vh)' },
           '100%': { transform: 'translateY(-100vh)' }
+        },
+        'pulse-slow': {
+          '0%, 100%': {
+            opacity: 0.6,
+            transform: 'scale(1)'
+          },
+          '50%': {
+            opacity: 0.9,
+            transform: 'scale(1.05)'
+          }
+        },
+        'pulse-yellow': {
+          '0%, 100%': {
+            filter: 'drop-shadow(0 0 2px rgba(234, 179, 8, 0.3))',
+            opacity: 0.8
+          },
+          '50%': {
+            filter: 'drop-shadow(0 0 8px rgba(234, 179, 8, 0.8))',
+            opacity: 1
+          }
+        },
+        'pulse-blue': {
+          '0%, 100%': {
+            filter: 'drop-shadow(0 0 2px rgba(6, 182, 212, 0.3))',
+            opacity: 0.8
+          },
+          '50%': {
+            filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.8))',
+            opacity: 1
+          }
         },
         glow: {
           '0%, 100%': {

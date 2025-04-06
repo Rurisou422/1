@@ -5,6 +5,22 @@
 @layer base {
   body {
     @apply bg-black text-white;
+    overscroll-behavior: none; /* Prevents bounce effects */
+  }
+  
+  /* Fix for the section with green/yellow background */
+  .bg-black {
+    background-color: #000 !important;
+    border: none !important;
+  }
+  
+  /* Target the specific section causing issues */
+  section.py-20 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    background-color: #000 !important;
+    border: none !important;
+    margin-top: 0 !important;
   }
 }
 
@@ -23,4 +39,39 @@
       0 0 20px rgba(59, 130, 246, 0.8),
       0 0 30px rgba(59, 130, 246, 0.6);
   }
+}
+
+/* Improved scrolling experience */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but maintain scrolling functionality */
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-y: auto; /* Ensure vertical scrolling is enabled */
+  height: 100%; /* Full height to ensure proper scrolling */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* For any other elements that need scrolling but without a visible scrollbar */
+.scrollable-content {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow-y: auto; /* Ensure vertical scrolling is enabled */
+  overscroll-behavior: none; /* Prevents bounce effects */
+}
+
+.scrollable-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Guide items consistent spacing */
+.guide-item + .guide-item {
+  margin-top: 0.75rem;
 } 

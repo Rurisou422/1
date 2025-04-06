@@ -199,12 +199,17 @@ const ProductCard = ({
   onOpenDetail: (product: Product) => void;
   delay?: number;
 }) => {
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: false, amount: 0.3 });
+  
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
-      className="bg-[#0c0c0c] border border-gray-800 rounded-xl overflow-hidden flex flex-col h-full"
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.3 }}
+      className="bg-[#0c0c0c] border border-gray-900 rounded-xl overflow-hidden flex flex-col h-full mx-auto w-full"
+      style={{ minHeight: '400px', maxWidth: '280px' }}
     >
       {/* Product Image */}
       <div className="relative h-60 overflow-hidden">
@@ -217,7 +222,7 @@ const ProductCard = ({
       
       {/* Product Info */}
       <div className="flex flex-col flex-grow p-6 bg-black">
-        <h3 className="text-xl font-bold mb-2">{title}</h3>
+        <h3 className="text-xl font-bold mb-2 line-clamp-2 h-14 text-center">{title}</h3>
         
         {/* Bottom section with price and button */}
         <div className="mt-auto pt-4 flex justify-between items-center">
@@ -317,6 +322,27 @@ const Products = () => {
     }
   });
 
+  // Ensure we always have at least 4 items in the grid to maintain consistent height
+  const ensureMinimumItems = (items: Product[], minCount: number = 4) => {
+    if (items.length >= minCount) return items;
+    
+    // If we don't have enough items, duplicate the last one to maintain grid layout
+    const result = [...items];
+    const lastItem = items[items.length - 1];
+    
+    while (result.length < minCount) {
+      result.push({
+        ...lastItem,
+        id: lastItem.id + result.length, // Ensure unique IDs
+      });
+    }
+    
+    return result;
+  };
+
+  // Get products with minimum count to maintain consistent layout
+  const displayProducts = ensureMinimumItems(filteredProducts);
+
   const handleOpenProductDetail = (product: Product) => {
     setSelectedProduct(product);
   };
@@ -326,7 +352,7 @@ const Products = () => {
   };
 
   return (
-    <section className="py-20 bg-black">
+    <section className="py-12 pb-0 bg-black border-0" style={{ borderTop: 'none', borderBottom: 'none', marginTop: '-40px' }}>
       <div className="max-w-6xl mx-auto pt-20">
         {/* Title */}
         <div className="text-center mb-12">
@@ -356,7 +382,7 @@ const Products = () => {
             </motion.button>
 
             <motion.button
-              onClick={() => setActiveCategory('hardware')}
+              onClick={() => setActiveCategory('hardware bundles')}
               className={`relative px-6 py-3 rounded-xl backdrop-blur-sm transition-all overflow-hidden group ${
                 activeCategory === 'hardware bundles' 
                   ? 'bg-gradient-to-r from-cyan-600/20 to-cyan-600/5 shadow-[0_0_15px_rgba(8,145,178,0.2)] border border-cyan-500/30' 
@@ -411,55 +437,57 @@ const Products = () => {
           </div>
         </div>
         
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={activeCategory}
-              className="contents"
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              variants={{
-                hidden: { opacity: 0 },
-                show: {
-                  opacity: 1,
-                  transition: {
-                    staggerChildren: 0.03
-                  }
-                }
-              }}
-            >
-              {filteredProducts.map((product, index) => (
-                <motion.div
-                  key={product.id}
-                  variants={{
-                    hidden: { opacity: 0, y: 15 },
-                    show: { 
-                      opacity: 1, 
-                      y: 0, 
-                      transition: { 
-                        duration: 0.2,
-                        ease: "easeOut"
-                      } 
+        {/* Product Grid - Fixed height container to prevent layout shifts */}
+        <div className="min-h-0 border-0" style={{ borderBottom: 'none' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 border-0 mb-0 max-w-6xl mx-auto">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={activeCategory}
+                className="contents"
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                variants={{
+                  hidden: { opacity: 0 },
+                  show: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.03
                     }
-                  }}
-                >
-                  <ProductCard
-                    title={product.title}
-                    image={product.image}
-                    premium={product.premium}
-                    tags={product.tags}
-                    features={product.features}
-                    category={product.category}
-                    product={product}
-                    onOpenDetail={handleOpenProductDetail}
-                    delay={index * 0.05}
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+                  }
+                }}
+              >
+                {displayProducts.map((product, index) => (
+                  <motion.div
+                    key={product.id}
+                    variants={{
+                      hidden: { opacity: 0, y: 15 },
+                      show: { 
+                        opacity: 1, 
+                        y: 0, 
+                        transition: { 
+                          duration: 0.2,
+                          ease: "easeOut"
+                        } 
+                      }
+                    }}
+                  >
+                    <ProductCard
+                      title={product.title}
+                      image={product.image}
+                      premium={product.premium}
+                      tags={product.tags}
+                      features={product.features}
+                      category={product.category}
+                      product={product}
+                      onOpenDetail={handleOpenProductDetail}
+                      delay={index * 0.05}
+                    />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
 

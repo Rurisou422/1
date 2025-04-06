@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import { motion } from 'framer-motion';
 import '../src/index.css';
 import Navbar from '../src/components/Navbar';
-import Footer from '../src/components/Footer';
+// import Footer from '../src/components/Footer';
 import StarField from '../src/components/StarField';
 import ChatBot from '../src/components/ChatBot';
 
@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </main>
 
-      <Footer />
+      {/* Footer removed */}
       
       {/* Add ChatBot component */}
       <ChatBot />
