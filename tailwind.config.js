@@ -1,14 +1,21 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html"
   ],
   theme: {
     extend: {
       colors: {
-        'primary': '#3B82F6',
-        'secondary': '#1F2937',
+        cyan: {
+          400: '#22d3ee',
+          500: '#06b6d4',
+          900: '#164e63',
+        },
+        blue: {
+          400: '#60a5fa',
+          500: '#3b82f6',
+        },
       },
       animation: {
         'glow': 'glow 2s ease-in-out infinite',

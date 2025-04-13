@@ -34,14 +34,12 @@ const NavLink = ({ to, children, onClick }: { to: string; children: React.ReactN
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [showLegal, setShowLegal] = useState(false);
   const [showAmateur, setShowAmateur] = useState(false);
   const location = useLocation();
 
   // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false);
-    setShowLegal(false);
   }, [location]);
 
   // Add scroll event listener
@@ -55,19 +53,6 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Close legal dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (!target.closest('.legal-dropdown') && !target.closest('.legal-button')) {
-        setShowLegal(false);
-      }
-    };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
   return (
     <>
       {/* GameSettingsUI */}
@@ -109,54 +94,10 @@ const Navbar: React.FC = () => {
             {/* Center - Desktop Navigation Links */}
             <div className="hidden md:flex items-center space-x-6 justify-center w-full">
               <NavLink to="/">Home</NavLink>
+              <NavLink to="/hardware">Hardware</NavLink>
+              <NavLink to="/firmware">Firmware</NavLink>
+              <NavLink to="/software">Software</NavLink>
               <NavLink to="/guides">Guides</NavLink>
-              <NavLink to="/status">Status</NavLink>
-              
-              {/* Legal Pages Dropdown */}
-              <div className="relative legal-dropdown">
-                <button 
-                  onClick={() => setShowLegal(!showLegal)}
-                  className="legal-button relative px-4 py-2 text-base font-semibold tracking-wide text-gray-200 hover:text-white transition-all duration-300 flex items-center"
-                >
-                  Legal
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className={`h-4 w-4 ml-1 transition-transform ${showLegal ? 'rotate-180' : ''}`} 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                
-                <AnimatePresence>
-                  {showLegal && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full mt-1 right-0 w-48 bg-black/90 backdrop-blur-md border border-gray-800 rounded-md overflow-hidden shadow-xl z-10"
-                    >
-                      <Link 
-                        to="/terms" 
-                        onClick={() => setShowLegal(false)}
-                        className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors"
-                      >
-                        Terms of Service
-                      </Link>
-                      <Link 
-                        to="/privacy" 
-                        onClick={() => setShowLegal(false)}
-                        className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800/50 hover:text-white transition-colors"
-                      >
-                        Privacy Policy
-                      </Link>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
             </div>
             
             {/* Search Input - Positioned at the right */}
@@ -208,21 +149,22 @@ const Navbar: React.FC = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden bg-black/90 backdrop-blur-md border-b border-gray-800"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-[70px] left-0 right-0 p-4"
             >
-              <div className="px-2 pt-2 pb-4 space-y-1">
-                {/* Amateur Button in Mobile Menu */}
-                <div className="py-2 px-3 border-b border-gray-800/30 mb-2">
+              {/* Mobile Menu Links */}
+              <div className="py-6 bg-[#121212]/95 backdrop-blur-md rounded-lg border border-[#333333] shadow-xl">
+                {/* Mobile Start Journey Button */}
+                <div className="px-3 pb-3 mb-2 border-b border-gray-800/30">
                   <button
                     onClick={() => {
                       setShowAmateur(true);
                       setIsOpen(false);
                     }}
-                    className="relative w-full px-4 py-2 text-base font-semibold tracking-wide flex items-center text-white hover:text-cyan-300 bg-black/50 rounded-md border border-cyan-500"
+                    className="relative w-full px-4 py-2 text-base font-semibold tracking-wide flex items-center justify-center text-white hover:text-cyan-300 bg-black/50 rounded-md border border-cyan-500"
                   >
                     <motion.div 
                       className="absolute inset-0 rounded-md"
@@ -241,39 +183,25 @@ const Navbar: React.FC = () => {
                     Start Journey
                   </button>
                 </div>
+                
                 <div className="py-2 px-3">
                   <NavLink to="/" onClick={() => setIsOpen(false)}>Home</NavLink>
                 </div>
                 <div className="py-2 px-3">
+                  <NavLink to="/hardware" onClick={() => setIsOpen(false)}>Hardware</NavLink>
+                </div>
+                <div className="py-2 px-3">
+                  <NavLink to="/firmware" onClick={() => setIsOpen(false)}>Firmware</NavLink>
+                </div>
+                <div className="py-2 px-3">
+                  <NavLink to="/software" onClick={() => setIsOpen(false)}>Software</NavLink>
+                </div>
+                <div className="py-2 px-3">
                   <NavLink to="/guides" onClick={() => setIsOpen(false)}>Guides</NavLink>
                 </div>
-                <div className="py-2 px-3">
-                  <NavLink to="/status" onClick={() => setIsOpen(false)}>Status</NavLink>
-                </div>
                 
-                {/* Legal Pages in Mobile Menu */}
-                <div className="py-2 px-3 border-t border-gray-800/50 my-2">
-                  <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                    Legal Pages
-                  </div>
-                  <Link
-                    to="/terms"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Terms of Service
-                  </Link>
-                  <Link
-                    to="/privacy"
-                    className="block px-4 py-2 text-sm text-gray-300 hover:text-white"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Privacy Policy
-                  </Link>
-                </div>
-                
-                {/* Update mobile menu Shop button to Search form */}
-                <div className="py-2 px-3">
+                {/* Search in Mobile Menu */}
+                <div className="py-2 px-3 mt-2 border-t border-gray-800/50">
                   <div className="relative flex items-center w-full bg-[#18191C]/80 rounded-md border border-gray-800">
                     <div className="flex items-center pl-3 pr-2">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -12,6 +12,10 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import AntiCheat from './components/AntiCheat';
 import StatsCounter from './components/StatsCounter';
+import Hardware from './components/Hardware';
+import Firmware from './components/Firmware';
+import Software from './components/Software';
+import Legal from './components/Legal';
 
 const HomePage = () => {
   const scrollToProducts = () => {
@@ -177,6 +181,10 @@ const AppContent = () => {
           <Route path="/guides" element={<Guides />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/hardware" element={<Hardware />} />
+          <Route path="/firmware" element={<Firmware />} />
+          <Route path="/software" element={<Software />} />
+          <Route path="/legal" element={<Legal />} />
         </Routes>
       </main>
 

@@ -1,50 +1,44 @@
-# DIVINER.GG
+# Diviner Firmware Component
 
-Modern, cyberpunk-themed landing page for DIVINER services featuring animated components, product catalog, and system status.
+This repository contains a React component for displaying a firmware product with features, system compatibility, and pricing tiers.
 
 ## Features
 
-- Responsive design with modern cyberpunk aesthetic
-- Interactive UI elements with hover effects and animations
-- Product showcase with filtering capability
-- System status monitoring page
-- Built with React, Tailwind CSS, and Framer Motion
+- Responsive design with Tailwind CSS
+- Smooth animations with Framer Motion
+- Optimized rendering with React hooks and memoization
+- Dynamic pricing tiers with visual effects
+- Anti-cheat compatibility icons
 
-## Development
+## Technologies Used
 
-### Prerequisites
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
 
-- Node.js (v14 or higher)
-- npm or yarn
+## Installation
 
-### Installation
+1. Clone this repository
+2. Install dependencies with `npm install`
+3. Start the development server with `npm start`
 
-1. Clone the repository
-```bash
-git clone https://github.com/Rurisou422/Test.git
-cd Test
+## Usage
+
+Import the Firmware component into your React application:
+
+```tsx
+import Firmware from './components/Firmware';
+
+function App() {
+  return (
+    <div className="App">
+      <Firmware />
+    </div>
+  );
+}
 ```
 
-2. Install dependencies
-```bash
-npm install
-# or
-yarn
-```
+## License
 
-3. Start the development server
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-4. Open your browser and navigate to `http://localhost:5173`
-
-## Building for Production
-
-```bash
-npm run build
-# or
-yarn build
-``` 
+MIT 
