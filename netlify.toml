@@ -1,15 +1,6 @@
 [build]
-  command = "npm i ajv && npm run build"
-  publish = "build"
-  node_version = "18.18.2"
-  ignore_next_js = true
-
-[build.environment]
-  NODE_VERSION = "18.18.2"
-  NODE_ENV = "production"
-  NPM_FLAGS = "--no-frozen-lockfile --force"
-  NETLIFY_USE_NEXTJS = "false"
-  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  # No build command needed - just publish the static files
+  publish = "."
 
 [[redirects]]
   from = "/*"

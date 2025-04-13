@@ -1,44 +1,13 @@
-# Diviner Firmware Component
+# Diviner Firmware
 
-This repository contains a React component for displaying a firmware product with features, system compatibility, and pricing tiers.
+A simple static HTML presentation for Diviner Firmware.
 
 ## Features
 
-- Responsive design with Tailwind CSS
-- Smooth animations with Framer Motion
-- Optimized rendering with React hooks and memoization
-- Dynamic pricing tiers with visual effects
-- Anti-cheat compatibility icons
+- Clean and simple HTML/CSS design
+- Fully responsive layout
+- No build process required
 
-## Technologies Used
+## Deployment
 
-- React
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-
-## Installation
-
-1. Clone this repository
-2. Install dependencies with `npm install`
-3. Start the development server with `npm start`
-
-## Usage
-
-Import the Firmware component into your React application:
-
-```tsx
-import Firmware from './components/Firmware';
-
-function App() {
-  return (
-    <div className="App">
-      <Firmware />
-    </div>
-  );
-}
-```
-
-## License
-
-MIT 
+This site is ready to deploy to Netlify without any build process. 
