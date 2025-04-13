@@ -1,13 +1,13 @@
 [build]
   command = "npm run build"
-  publish = "dist"
+  publish = "build"
   node_version = "18.18.2"
   ignore_next_js = true
 
 [build.environment]
   NODE_VERSION = "18.18.2"
   NODE_ENV = "production"
-  NPM_FLAGS = "--no-optional"
+  NPM_FLAGS = "--no-frozen-lockfile"
   NETLIFY_USE_NEXTJS = "false"
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
@@ -15,3 +15,10 @@
   from = "/*"
   to = "/index.html"
   status = 200 
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+  
+[dev]
+  command = "npm run start"
+  framework = "#custom" 
